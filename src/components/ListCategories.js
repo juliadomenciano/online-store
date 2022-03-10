@@ -38,3 +38,5 @@ class ListCategories extends Component {
 }
 
 export default ListCategories;
+
+// Pair programming Lazaro Ramos, Leonardo Begnossi
