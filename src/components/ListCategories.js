@@ -23,8 +23,8 @@ class ListCategories extends Component {
   render() {
     const { categories } = this.state;
     return (
-      <div>
-        <h2>Categoris:</h2>
+      <div className="ListCategories">
+        <h2>Categorias:</h2>
         <div>
           {categories.map((item) => (
             <li key={ item.id } data-testid="category">
