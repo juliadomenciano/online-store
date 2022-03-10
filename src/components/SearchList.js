@@ -8,31 +8,53 @@ class SearchList extends Component {
     super();
 
     this.state = {
+      categoryId: 'MLB1403',
+      query: '',
       productsList: [],
     };
   }
 
-  async componentDidMount() {
+  fetchProducts = async () => {
+    const { categoryId, query } = this.state;
     const response = await getProductsFromCategoryAndQuery(
-      'MLB1403',
-      'coca-cola',
+      categoryId,
+      query,
     );
     const productsList = response.results;
     this.setState({ productsList });
   }
 
+  handleQueryInput = ({ target }) => {
+    const query = target.value;
+    this.setState({ query });
+  }
+
   render() {
-    const { productsList } = this.state;
+    const { productsList, query } = this.state;
 
     return (
       <section className="SearchList">
-        <input type="text" />
-        {!productsList.length && (
+        <form>
+          <input
+            data-testid="query-input"
+            type="text"
+            value={ query }
+            onChange={ this.handleQueryInput }
+          />
+          <button
+            type="button"
+            data-testid="query-button"
+            onClick={ this.fetchProducts }
+          >
+            Pesquisar
+          </button>
+        </form>
+        {Boolean(!productsList.length) && (
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
         )}
-        {productsList.length
+        {Boolean(productsList.length)
           && productsList.map((product) => (
             <ProductCard
               key={ product.id }
