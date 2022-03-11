@@ -27,7 +27,11 @@ class ShoppingCart extends React.Component {
           </p>
         )}
         {Boolean(cartList.length)
-          && cartList.map((item) => <CartItem key={ item.id } { ...item } />)}
+          && (
+            <ul>
+              {cartList.map((item) => <CartItem key={ item.id } { ...item } />)}
+            </ul>
+          )}
       </section>
     );
   }
