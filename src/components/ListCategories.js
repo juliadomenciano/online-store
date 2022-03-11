@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { getCategories } from '../services/api';
 
@@ -22,14 +23,22 @@ class ListCategories extends Component {
 
   render() {
     const { categories } = this.state;
+    const { filterByCategory } = this.props;
+
     return (
-      <aside className="ListCategories">
+      <aside className="CategoriesList">
         <h2>Categorias:</h2>
         <ul>
           {categories.map((item) => (
             <li key={ item.id } data-testid="category">
-              <label htmlFor={ idem.id }>
-                <input id={ item.id } type="radio" />
+              <label htmlFor={ item.id }>
+                <input
+                  id={ item.id }
+                  type="radio"
+                  name="categories"
+                  value={ item.id }
+                  onChange={ filterByCategory }
+                />
                 {item.name}
               </label>
             </li>
@@ -39,6 +48,11 @@ class ListCategories extends Component {
     );
   }
 }
+
+ListCategories.propTypes = {
+  filterByCategory: PropTypes.func.isRequired,
+
+};
 
 export default ListCategories;
 
