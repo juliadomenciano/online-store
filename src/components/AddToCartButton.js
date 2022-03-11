@@ -8,7 +8,7 @@ class AddToCartButton extends Component {
     return (
       <button
         type="button"
-        dataTestId={ dataTestId }
+        data-testid={ dataTestId }
         onClick={ () => handleAddCartToList(productId, productList) }
       >
         Adicionar ao carrinho
