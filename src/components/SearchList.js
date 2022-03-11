@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import ProductCard from './ProductCard';
 import './SearchList.css';
+import { Link } from 'react-router-dom';
 
 class SearchList extends Component {
   constructor() {
@@ -53,6 +54,8 @@ class SearchList extends Component {
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
+        ) }
+        <Link data-testid="shopping-cart-button" to="/shopping-cart">Carrinho</Link>
         )}
         {Boolean(productsList.length)
           && productsList.map((product) => (
