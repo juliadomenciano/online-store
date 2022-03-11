@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './SearchList.css';
+import { Link } from 'react-router-dom';
 
 class SearchList extends Component {
   constructor() {
@@ -21,6 +22,7 @@ class SearchList extends Component {
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
         ) }
+        <Link data-testid="shopping-cart-button" to="/shopping-cart">Carrinho</Link>
       </section>
     );
   }
