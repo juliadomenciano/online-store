@@ -3,11 +3,12 @@ import React, { Component } from 'react';
 
 class AddToCartButton extends Component {
   render() {
-    const { handleAddCartToList, productId, productList } = this.props;
+    const { handleAddCartToList, productId, productList, dataTestId } = this.props;
 
     return (
       <button
         type="button"
+        dataTestId={ dataTestId }
         onClick={ () => handleAddCartToList(productId, productList) }
       >
         Adicionar ao carrinho
@@ -20,6 +21,7 @@ AddToCartButton.propTypes = {
   handleAddCartToList: PropTypes.func.isRequired,
   productId: PropTypes.string.isRequired,
   productList: PropTypes.arrayOf(PropTypes.object).isRequired,
+  dataTestId: PropTypes.string.isRequired,
 };
 
 export default AddToCartButton;
