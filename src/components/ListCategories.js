@@ -28,7 +28,10 @@ class ListCategories extends Component {
         <ul>
           {categories.map((item) => (
             <li key={ item.id } data-testid="category">
-              {item.name}
+              <label htmlFor={ idem.id }>
+                <input id={ item.id } type="radio" />
+                {item.name}
+              </label>
             </li>
           ))}
         </ul>
