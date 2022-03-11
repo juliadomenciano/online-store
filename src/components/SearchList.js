@@ -16,6 +16,10 @@ class SearchList extends Component {
     };
   }
 
+  async componentDidMount() {
+    await this.fetchProducts();
+  }
+
   fetchProducts = async () => {
     const { categoryId, query } = this.state;
     const response = await getProductsFromCategoryAndQuery(
@@ -41,7 +45,7 @@ class SearchList extends Component {
   }
 
   render() {
-    const { productsList, query, categoryId } = this.state;
+    const { productsList, query } = this.state;
 
     return (
       <>
@@ -70,24 +74,18 @@ class SearchList extends Component {
             </p>
           )}
           <Link data-testid="shopping-cart-button" to="/shopping-cart">Carrinho</Link>
-          {categoryId.length
+          {
+            Boolean(productsList.length)
+           && productsList.map((product) => (
+             <ProductCard
+               key={ product.id }
+               title={ product.title }
+               image={ product.thumbnail }
+               price={ product.price }
+             />
+           ))
+          }
 
-            ? productsList.map((cat) => (
-              <ProductCard
-                key={ cat.id }
-                title={ cat.title }
-                image={ cat.thumbnail }
-                price={ cat.price }
-              />
-            ))
-            : productsList.map((product) => (
-              <ProductCard
-                key={ product.id }
-                title={ product.title }
-                image={ product.thumbnail }
-                price={ product.price }
-              />
-            ))}
         </section>
 
       </>
