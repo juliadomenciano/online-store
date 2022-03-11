@@ -8,7 +8,7 @@ class SearchList extends Component {
     super();
 
     this.state = {
-      categoryId: 'MLB1403',
+      categoryId: '',
       query: '',
       productsList: [],
     };
