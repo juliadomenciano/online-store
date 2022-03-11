@@ -10,29 +10,29 @@ class ListCategories extends Component {
   }
 
   componentDidMount() {
-    this.fetchAPI();
+    this.fetchCategories();
   }
 
-  fetchAPI = async () => {
-    const category = await getCategories();
+  fetchCategories = async () => {
+    const categories = await getCategories();
     this.setState({
-      categories: category,
+      categories,
     });
   }
 
   render() {
     const { categories } = this.state;
     return (
-      <div className="ListCategories">
+      <aside className="ListCategories">
         <h2>Categorias:</h2>
-        <div>
+        <ul>
           {categories.map((item) => (
             <li key={ item.id } data-testid="category">
               {item.name}
             </li>
           ))}
-        </div>
-      </div>
+        </ul>
+      </aside>
     );
   }
 }
