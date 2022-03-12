@@ -56,8 +56,7 @@ class SearchList extends Component {
           </p>
         )}
         <Link data-testid="shopping-cart-button" to="/shopping-cart">Carrinho</Link>
-        {
-          Boolean(productsList.length)
+        {Boolean(productsList.length)
           && productsList.map((product) => (
             <ProductCard
               key={ product.id }
@@ -65,8 +64,7 @@ class SearchList extends Component {
               image={ product.thumbnail }
               price={ product.price }
             />
-          ))
-        }
+          ))}
       </section>
     );
   }
