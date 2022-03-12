@@ -50,13 +50,14 @@ class SearchList extends Component {
             Pesquisar
           </button>
         </form>
-        {Boolean(!productsList.length) && (
-          <p data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </p>
-        )}
-        <Link data-testid="shopping-cart-button" to="/shopping-cart">Carrinho</Link>
-        {Boolean(productsList.length)
+        <div className="cardsContainer">
+          {Boolean(!productsList.length) && (
+            <p data-testid="home-initial-message">
+              Digite algum termo de pesquisa ou escolha uma categoria.
+            </p>
+          )}
+          <Link data-testid="shopping-cart-button" to="/shopping-cart">Carrinho</Link>
+          {Boolean(productsList.length)
           && productsList.map((product) => (
             <ProductCard
               key={ product.id }
@@ -65,6 +66,7 @@ class SearchList extends Component {
               price={ product.price }
             />
           ))}
+        </div>
       </section>
     );
   }
