@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import './ProductCard.css';
 
 class ProductCard extends Component {
@@ -8,7 +8,7 @@ class ProductCard extends Component {
 
     return (
       <section className="ProductCard" data-testid="product">
-        <h3>{ title }</h3>
+        <h3 className="title">{ title }</h3>
         <img src={ image } alt={ title } />
         <p>{ price }</p>
       </section>

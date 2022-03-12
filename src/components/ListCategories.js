@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { getCategories } from '../services/api';
+import './ListCategories.css';
 
 class CategoriesList extends Component {
   constructor() {

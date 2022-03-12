@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import SearchList from './components/SearchList';
-import ListCategories from './components/ListCategories';
 import ShoppingCart from './components/ShoppingCart';
 
 class App extends Component {
@@ -24,19 +23,16 @@ class App extends Component {
     const { cartList } = this.state;
 
     return (
-      <>
-        <BrowserRouter>
-          <Switch>
-            <Route exact path="/">
-              <SearchList handleAddCartToList={ this.handleAddCartToList } />
-            </Route>
-            <Route path="/shopping-cart">
-              <ShoppingCart cartList={ cartList } />
-            </Route>
-          </Switch>
-        </BrowserRouter>
-        <ListCategories />
-      </>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            <SearchList handleAddCartToList={ this.handleAddCartToList } />
+          </Route>
+          <Route path="/shopping-cart">
+            <ShoppingCart cartList={ cartList } />
+          </Route>
+        </Switch>
+      </BrowserRouter>
     );
   }
 }
