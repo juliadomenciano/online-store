@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { getProductById } from '../services/api';
+import AddToCartButton from './AddToCartButton';
 
 class ProductPage extends Component {
   constructor() {
@@ -16,11 +17,18 @@ class ProductPage extends Component {
 
   render() {
     const { title, thumbnail, price } = this.state;
+    const { handleAddCartToList } = this.props;
+
     return (
       <section>
         <h2 data-testid="product-detail-name">{title}</h2>
         <img src={ thumbnail } alt={ title } />
         <p>{`R$ ${price}`}</p>
+        <AddToCartButton
+          handleAddCartToList={ handleAddCartToList }
+          dataTestId="product-detail-add-to-cart"
+          productObj={ this.state }
+        />
       </section>
     );
   }
@@ -28,6 +36,7 @@ class ProductPage extends Component {
 
 ProductPage.propTypes = {
   match: PropTypes.objectOf(Object).isRequired,
+  handleAddCartToList: PropTypes.func.isRequired,
 };
 
 export default ProductPage;
