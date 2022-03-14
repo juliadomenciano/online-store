@@ -21,13 +21,13 @@ class ShoppingCart extends React.Component {
 
     return (
       <section className="ShoppingCart">
-        {Boolean(!cartList.length) && (
-          <p data-testid="shopping-cart-empty-message">
-            Seu carrinho está vazio
-          </p>
-        )}
-        {Boolean(cartList.length)
-          && (
+        {!cartList.length
+          ? (
+            <p data-testid="shopping-cart-empty-message">
+              Seu carrinho está vazio
+            </p>
+          )
+          : (
             <ul>
               {cartList.map((item) => <CartItem key={ item.id } { ...item } />)}
             </ul>
