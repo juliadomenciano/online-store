@@ -1,5 +1,6 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
+import CartItem from './CartItem';
 
 class ShoppingCart extends React.Component {
   constructor() {
@@ -21,14 +22,16 @@ class ShoppingCart extends React.Component {
     return (
       <section className="ShoppingCart">
         {Boolean(!cartList.length) && (
-          <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
-        )}
-        {Boolean(cartList.length) && (
-          <p>
-            Colocar aqui um map renderizando cada item da cartList
-            (esse parágrafo é só um exemplo)
+          <p data-testid="shopping-cart-empty-message">
+            Seu carrinho está vazio
           </p>
         )}
+        {Boolean(cartList.length)
+          && (
+            <ul>
+              {cartList.map((item) => <CartItem key={ item.id } { ...item } />)}
+            </ul>
+          )}
       </section>
     );
   }
