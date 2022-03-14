@@ -5,7 +5,7 @@ class ShoppingCart extends React.Component {
   constructor() {
     super();
 
-    this.setState = {
+    this.state = {
       cartList: [],
     };
   }
