@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import ProductsDetails from './ProductsDetails';
 
 class CartItem extends Component {
   constructor() {
@@ -25,29 +26,35 @@ class CartItem extends Component {
     const { title, thumbnail, price } = this.props;
 
     return (
-      <li className="CartItem">
-        <button type="button">Remover</button>
-        <img src={ thumbnail } alt={ title } />
-        <span>{title}</span>
-        <div>
-          <button
-            type="button"
-            data-testid="product-decrease-quantity"
-            onClick={ () => this.handleDecrease }
-          >
-            -
-          </button>
-          <span>{quantity}</span>
-          <button
-            type="button"
-            data-testid="product-increase-quantity"
-            onClick={ () => this.handleIncrease }
-          >
-            +
-          </button>
-        </div>
-        <span>{`R$ ${price}`}</span>
-      </li>
+      <>
+        <li className="CartItem">
+          <button type="button">Remover</button>
+          <img src={ thumbnail } alt={ title } />
+          <span>{title}</span>
+          <div>
+            <button
+              type="button"
+              data-testid="product-decrease-quantity"
+              onClick={ () => this.handleDecrease }
+            >
+              -
+            </button>
+            <span>{quantity}</span>
+            <button
+              type="button"
+              data-testid="product-increase-quantity"
+              onClick={ () => this.handleIncrease }
+            >
+              +
+            </button>
+          </div>
+          <span>{`R$ ${price}`}</span>
+        </li>
+        <section>
+          <ProductsDetails />
+        </section>
+      </>
+
     );
   }
 }
