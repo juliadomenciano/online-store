@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
 import './App.css';
 import ProductPage from './components/ProductPage';
 import SearchList from './components/SearchList';
@@ -14,17 +14,26 @@ class App extends Component {
     };
   }
 
-  handleAddCartToList = (productId, list) => {
+  handleAddCartToList = (productId, list, productObj) => {
     const { cartList } = this.state;
-    const selectedProduct = list.find((product) => product.id === productId);
-    this.setState({ cartList: [...cartList, selectedProduct] });
-  }
+    if (productObj) {
+      this.setState({ cartList: [...cartList, productObj] });
+    } else {
+      const selectedProduct = list.find((product) => product.id === productId);
+      this.setState({ cartList: [...cartList, selectedProduct] });
+    }
+  };
 
   render() {
     const { cartList } = this.state;
 
     return (
       <BrowserRouter>
+        <Route path="/">
+          <Link data-testid="shopping-cart-button" to="/shopping-cart">
+            Carrinho
+          </Link>
+        </Route>
         <Switch>
           <Route exact path="/">
             <SearchList handleAddCartToList={ this.handleAddCartToList } />
@@ -35,7 +44,12 @@ class App extends Component {
           <Route
             exact
             path="/product/:id"
-            render={ (props) => (<ProductPage { ...props } />) }
+            render={ (props) => (
+              <ProductPage
+                handleAddCartToList={ this.handleAddCartToList }
+                { ...props }
+              />
+            ) }
           />
         </Switch>
       </BrowserRouter>
