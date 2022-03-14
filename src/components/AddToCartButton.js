@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 
 class AddToCartButton extends Component {
   render() {
-    const { handleAddCartToList, productId, productList, dataTestId } = this.props;
+    const { handleAddCartToList, productId, dataTestId } = this.props;
 
     return (
       <button
         type="button"
         data-testid={ dataTestId }
-        onClick={ () => handleAddCartToList(productId, productList) }
+        onClick={ () => handleAddCartToList(productId) }
       >
         Adicionar ao carrinho
       </button>
@@ -20,7 +20,6 @@ class AddToCartButton extends Component {
 AddToCartButton.propTypes = {
   handleAddCartToList: PropTypes.func.isRequired,
   productId: PropTypes.string.isRequired,
-  productList: PropTypes.arrayOf(PropTypes.object).isRequired,
   dataTestId: PropTypes.string.isRequired,
 };
 
