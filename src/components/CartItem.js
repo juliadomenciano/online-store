@@ -6,7 +6,7 @@ class CartItem extends Component {
     super();
 
     this.state = {
-      quantity: 0,
+      quantity: 1,
     };
   }
 
@@ -28,7 +28,7 @@ class CartItem extends Component {
       <li className="CartItem">
         <button type="button">Remover</button>
         <img src={ thumbnail } alt={ title } />
-        <span>{title}</span>
+        <span data-testid="shopping-cart-product-name">{title}</span>
         <div>
           <button
             type="button"
@@ -37,7 +37,7 @@ class CartItem extends Component {
           >
             -
           </button>
-          <span>{quantity}</span>
+          <span data-testid="shopping-cart-product-quantity">{quantity}</span>
           <button
             type="button"
             data-testid="product-increase-quantity"
