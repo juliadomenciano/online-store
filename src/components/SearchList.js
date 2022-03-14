@@ -79,7 +79,6 @@ class SearchList extends Component {
                 image={ product.thumbnail }
                 price={ product.price }
                 productId={ product.id }
-                productList={ productsList }
                 handleAddCartToList={ handleAddCartToList }
               />
             ))}
