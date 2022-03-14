@@ -8,6 +8,7 @@ class ProductsDetails extends React.Component {
       email: '',
       menssage: '',
       rating: [],
+      arr: [],
     };
   }
 
@@ -15,13 +16,15 @@ handleChange = ({ target }) => {
   this.setState({ [target.name]: target.value });
 }
 
-handleSubmit = (event) => {
-  const { email, menssage, rating } = this.state;
-  event.preventDefault();
-  /* JSON.parse(localStorage.getItem('key')) */
+handleSubmit = () => {
+  const { productId } = this.props;
+  const { email, menssage, rating, arr } = this.state;
   this.setState({ email, menssage, rating });
-  const arr = [email, menssage, rating];
-  localStorage.setItem('key', JSON.string(arr));
+  const rate = { email, menssage, rating };
+  this.setState((prevState) => ({
+    arr: [prevState.arr, rate],
+  }));
+  localStorage.setItem(productId, JSON.stringify(rate));
 }
 
 render() {
@@ -68,7 +71,8 @@ render() {
 }
 ProductsDetails.propTypes = {
   email: PropTypes.func.isRequired,
-  menssage: PropTypes.string,
-  rating: PropTypes.string,
+  menssage: PropTypes.string.isRequired,
+  rating: PropTypes.string.isRequired,
+  productId: PropTypes.number.isRequired,
 };
 export default ProductsDetails;
