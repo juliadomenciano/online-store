@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import SearchList from './components/SearchList';
-import ListCategories from './components/ListCategories';
+import ListCategories from './components/CategoriesList';
 import ShoppingCart from './components/ShoppingCart';
 
 class App extends Component {

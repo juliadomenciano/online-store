@@ -33,7 +33,7 @@ class CartItem extends Component {
           <button
             type="button"
             data-testid="product-decrease-quantity"
-            onClick={ () => this.handleIncrease }
+            onClick={ () => this.handleDecrease }
           >
             -
           </button>
@@ -41,7 +41,7 @@ class CartItem extends Component {
           <button
             type="button"
             data-testid="product-increase-quantity"
-            onClick={ () => this.handleDecrease }
+            onClick={ () => this.handleIncrease }
           >
             +
           </button>
