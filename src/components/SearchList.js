@@ -37,9 +37,7 @@ class SearchList extends Component {
     const categoryId = target.value;
     this.setState({
       categoryId,
-    });
-
-    this.fetchProducts();
+    }, this.fetchProducts);
   };
 
   render() {
