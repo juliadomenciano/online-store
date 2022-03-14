@@ -4,7 +4,6 @@ import './App.css';
 import ProductPage from './components/ProductPage';
 import SearchList from './components/SearchList';
 import ShoppingCart from './components/ShoppingCart';
-import { getProductById } from './services/api';
 
 class App extends Component {
   constructor() {
@@ -15,9 +14,9 @@ class App extends Component {
     };
   }
 
-  handleAddCartToList = async (productId) => {
+  handleAddCartToList = (productId, list) => {
     const { cartList } = this.state;
-    const selectedProduct = await getProductById(productId);
+    const selectedProduct = list.find((product) => product.id === productId);
     this.setState({ cartList: [...cartList, selectedProduct] });
   }
 

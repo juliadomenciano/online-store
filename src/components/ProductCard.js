@@ -6,23 +6,27 @@ import './ProductCard.css';
 
 class ProductCard extends Component {
   render() {
-    const { title, image, price,
-      handleAddCartToList, productId } = this.props;
+    const {
+      title,
+      image,
+      price,
+      handleAddCartToList,
+      productId,
+      productList,
+    } = this.props;
 
     return (
       <section className="ProductCard" data-testid="product">
-        <Link
-          data-testid="product-detail-link"
-          to={ `/product/${productId}` }
-        >
-          <h3>{ title }</h3>
+        <Link data-testid="product-detail-link" to={ `/product/${productId}` }>
+          <h3>{title}</h3>
           <img src={ image } alt={ title } />
-          <p>{ price }</p>
+          <p>{price}</p>
         </Link>
         <AddToCartButton
           handleAddCartToList={ handleAddCartToList }
           productId={ productId }
           dataTestId="product-add-to-cart"
+          productList={ productList }
         />
       </section>
     );
@@ -35,6 +39,7 @@ ProductCard.propTypes = {
   price: PropTypes.number.isRequired,
   handleAddCartToList: PropTypes.func.isRequired,
   productId: PropTypes.string.isRequired,
+  productList: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default ProductCard;
