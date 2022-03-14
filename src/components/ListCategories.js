@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { getCategories } from '../services/api';
 
-class ListCategories extends Component {
+class CategoriesList extends Component {
   constructor() {
     super();
     this.state = {
@@ -49,11 +49,10 @@ class ListCategories extends Component {
   }
 }
 
-ListCategories.propTypes = {
+CategoriesList.propTypes = {
   filterByCategory: PropTypes.func.isRequired,
-
 };
 
-export default ListCategories;
+export default CategoriesList;
 
 // Pair programming Lazaro Ramos, Leonardo Begnossi

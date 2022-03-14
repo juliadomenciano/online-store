@@ -48,17 +48,38 @@ class SearchList extends Component {
     const { productsList, query } = this.state;
 
     return (
+
       <>
-        <section className="ListCategories">
-          <ListCategories filterByCategory={ this.FilterByCategory } />
-        </section>
-        <section className="SearchList">
-          <form>
-            <input
-              data-testid="query-input"
-              type="text"
-              value={ query }
-              onChange={ this.handleQueryInput }
+          <CategoriesList filterByCategory={ this.FilterByCategory } />
+      <section className="SearchList">
+        <form>
+          <input
+            data-testid="query-input"
+            type="text"
+            value={ query }
+            onChange={ this.handleQueryInput }
+          />
+          <button
+            type="button"
+            data-testid="query-button"
+            onClick={ this.fetchProducts }
+          >
+            Pesquisar
+          </button>
+        </form>
+        {Boolean(!productsList.length) && (
+          <p data-testid="home-initial-message">
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </p>
+        )}
+        <Link data-testid="shopping-cart-button" to="/shopping-cart">Carrinho</Link>
+        {Boolean(productsList.length)
+          && productsList.map((product) => (
+            <ProductCard
+              key={ product.id }
+              title={ product.title }
+              image={ product.thumbnail }
+              price={ product.price }
             />
             <button
               type="button"
