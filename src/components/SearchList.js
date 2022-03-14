@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery } from '../services/api';
@@ -36,13 +37,18 @@ class SearchList extends Component {
     const categoryId = target.value;
     this.setState({
       categoryId,
+<<<<<<< HEAD
     });
 
     this.fetchProducts();
+=======
+    }, this.fetchProducts);
+>>>>>>> 6619f3a6704ba0a556912a6ee3f67614b3a0eae6
   };
 
   render() {
     const { productsList, query } = this.state;
+    const { handleAddCartToList } = this.props;
 
     return (
       <>
@@ -78,6 +84,11 @@ class SearchList extends Component {
                 title={ product.title }
                 image={ product.thumbnail }
                 price={ product.price }
+<<<<<<< HEAD
+=======
+                productId={ product.id }
+                handleAddCartToList={ handleAddCartToList }
+>>>>>>> 6619f3a6704ba0a556912a6ee3f67614b3a0eae6
               />
             ))}
         </section>
@@ -85,5 +96,9 @@ class SearchList extends Component {
     );
   }
 }
+
+SearchList.propTypes = {
+  handleAddCartToList: PropTypes.func.isRequired,
+};
 
 export default SearchList;

@@ -6,7 +6,11 @@ class CartItem extends Component {
     super();
 
     this.state = {
+<<<<<<< HEAD
       quantity: 0,
+=======
+      quantity: 1,
+>>>>>>> 6619f3a6704ba0a556912a6ee3f67614b3a0eae6
     };
   }
 
@@ -28,7 +32,11 @@ class CartItem extends Component {
       <li className="CartItem">
         <button type="button">Remover</button>
         <img src={ thumbnail } alt={ title } />
+<<<<<<< HEAD
         <span>{title}</span>
+=======
+        <span data-testid="shopping-cart-product-name">{title}</span>
+>>>>>>> 6619f3a6704ba0a556912a6ee3f67614b3a0eae6
         <div>
           <button
             type="button"
@@ -37,7 +45,11 @@ class CartItem extends Component {
           >
             -
           </button>
+<<<<<<< HEAD
           <span>{quantity}</span>
+=======
+          <span data-testid="shopping-cart-product-quantity">{quantity}</span>
+>>>>>>> 6619f3a6704ba0a556912a6ee3f67614b3a0eae6
           <button
             type="button"
             data-testid="product-increase-quantity"
