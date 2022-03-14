@@ -1,8 +1,9 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery } from '../services/api';
-import ProductCard from './ProductCard';
 import CategoriesList from './CategoriesList';
+import ProductCard from './ProductCard';
 import './SearchList.css';
 
 class SearchList extends Component {
@@ -43,6 +44,7 @@ class SearchList extends Component {
 
   render() {
     const { productsList, query } = this.state;
+    const { handleAddCartToList } = this.props;
 
     return (
       <>
@@ -78,6 +80,9 @@ class SearchList extends Component {
                 title={ product.title }
                 image={ product.thumbnail }
                 price={ product.price }
+                productId={ product.id }
+                productList={ productsList }
+                handleAddCartToList={ handleAddCartToList }
               />
             ))}
         </section>
@@ -85,5 +90,9 @@ class SearchList extends Component {
     );
   }
 }
+
+SearchList.propTypes = {
+  handleAddCartToList: PropTypes.func.isRequired,
+};
 
 export default SearchList;
