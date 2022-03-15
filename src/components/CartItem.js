@@ -18,7 +18,7 @@ class CartItem extends Component {
   decreaseQuantity = () => {
     const { id, handleDecrease } = this.props;
     const { quantity } = this.state;
-    if (quantity > 0) this.setState({ quantity: quantity - 1 }, handleDecrease(id));
+    if (quantity > 1) this.setState({ quantity: quantity - 1 }, handleDecrease(id));
   }
 
   increaseQuantity = () => {
