@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { getProductById } from '../services/api';
 import AddToCartButton from './AddToCartButton';
-import ProductsDetails from './ProductsDetails';
+import ProductReviews from './ProductReviews';
 
 class ProductPage extends Component {
   constructor() {
@@ -32,7 +32,7 @@ class ProductPage extends Component {
             productObj={ this.state }
           />
         </section>
-        <ProductsDetails { ...this.props } />
+        <ProductReviews { ...this.props } />
       </div>
     );
   }
