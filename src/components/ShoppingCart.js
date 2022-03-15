@@ -41,7 +41,7 @@ class ShoppingCart extends React.Component {
             ))}
           </ul>
         )}
-        <Link to="/checkout">Finalizar Compra</Link>
+        <Link data-testid="checkout-products" to="/checkout">Finalizar Compra</Link>
       </section>
     );
   }
