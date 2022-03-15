@@ -13,11 +13,10 @@ class ProductPage extends Component {
     const { match: { params } } = this.props;
     const product = await getProductById(params.id);
     this.setState({ ...product });
-    console.log(this.state);
   }
 
   render() {
-    const { title, thumbnail, price, id } = this.state;
+    const { title, thumbnail, price } = this.state;
     return (
       <div>
         <section>
@@ -25,7 +24,7 @@ class ProductPage extends Component {
           <img src={ thumbnail } alt={ title } />
           <p>{`R$ ${price}`}</p>
         </section>
-        <ProductsDetails productId={ id } />
+        <ProductsDetails { ...this.props } />
       </div>
 
     );
