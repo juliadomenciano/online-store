@@ -2,12 +2,15 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { getProductById } from '../services/api';
 import AddToCartButton from './AddToCartButton';
+import FreeShipping from './FreeShipping';
 import ProductReviews from './ProductReviews';
 
 class ProductPage extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      shipping: {},
+    };
   }
 
   async componentDidMount() {
@@ -18,11 +21,14 @@ class ProductPage extends Component {
 
   render() {
     const { title, thumbnail, price } = this.state;
+    const { shipping } = this.state;
+    const freeShipping = shipping.free_shipping;
     const { handleAddCartToList } = this.props;
 
     return (
       <div>
         <section>
+          {freeShipping && <FreeShipping />}
           <h2 data-testid="product-detail-name">{title}</h2>
           <img src={ thumbnail } alt={ title } />
           <p>{`R$ ${price}`}</p>
