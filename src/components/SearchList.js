@@ -68,20 +68,25 @@ class SearchList extends Component {
             </p>
           )}
           {Boolean(productsList.length)
-            && productsList.map((product) => (
-              <ProductCard
-                key={ product.id }
-                item={ product }
-                title={ product.title }
-                image={ product.thumbnail }
-                price={ product.price }
-                availableQuantity={ product.available_quantity }
-                productId={ product.id }
-                productList={ productsList }
-                handleAddCartToList={ handleAddCartToList }
-                itemsQuantity={ itemsQuantity }
-              />
-            ))}
+            && productsList.map((product) => {
+              const { shipping } = product;
+              const freeShipping = shipping.free_shipping;
+              return (
+                <ProductCard
+                  key={ product.id }
+                  item={ product }
+                  title={ product.title }
+                  image={ product.thumbnail }
+                  price={ product.price }
+                  freeShipping={ freeShipping }
+                  availableQuantity={ product.available_quantity }
+                  productId={ product.id }
+                  productList={ productsList }
+                  handleAddCartToList={ handleAddCartToList }
+                  itemsQuantity={ itemsQuantity }
+                />
+              );
+            })}
         </section>
       </>
     );
