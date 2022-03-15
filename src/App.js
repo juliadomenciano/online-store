@@ -69,6 +69,9 @@ class App extends Component {
         <Route path="/">
           <Link data-testid="shopping-cart-button" to="/shopping-cart">
             Carrinho
+            <span data-testid="shopping-cart-size">
+              { Object.keys(itemsQuantity).length }
+            </span>
           </Link>
         </Route>
         <Switch>
