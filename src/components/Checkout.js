@@ -1,19 +1,32 @@
+import PropTypes from 'prop-types';
 import React from 'react';
+import { getProductById } from '../services/api';
 
 class Checkout extends React.Component {
   constructor() {
     super();
 
     this.state = {
-
+      /* fullName: '',
+      checkoutEmail: '',
+      cpf: '',
+      phone: '',
+      cep: '',
+      address: '', */
     };
   }
 
-  componentDidMount() {
-
+  async componentDidMount() {
+    const { itemsQuantity } = this.props;
+    /*     this.setState({ ...itemsQuantity }); */
+    await Object.keys(itemsQuantity).map((id) => {
+      const product = getProductById(id);
+      this.setState({ ...product }, () => console.log(this.state));
+    });
   }
 
   render() {
+    const { fullName, checkoutEmail, cpf, phone, cep, address } = this.state;
     return (
       <section className="Checkout">
         <form>
@@ -83,10 +96,15 @@ class Checkout extends React.Component {
   }
 }
 
-ShoppingCart.propTypes = {
-
+Checkout.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }).isRequired,
 };
-ShoppingCart.defaultProps = {
+
+Checkout.defaultProps = {
 
 };
 

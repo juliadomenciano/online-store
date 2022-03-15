@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
 import './App.css';
+import Checkout from './components/Checkout';
 import ProductPage from './components/ProductPage';
 import SearchList from './components/SearchList';
 import ShoppingCart from './components/ShoppingCart';
@@ -93,6 +94,11 @@ class App extends Component {
               />
             ) }
           />
+          <Route path="/checkout">
+            <Checkout
+              itemsQuantity={ itemsQuantity }
+            />
+          </Route>
         </Switch>
       </BrowserRouter>
     );
