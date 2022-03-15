@@ -8,30 +8,38 @@ class ShoppingCart extends React.Component {
 
     this.state = {
       cartList: [],
+      itemsQuantity: {},
     };
   }
 
   componentDidMount() {
-    const { cartList } = this.props;
-    this.setState({ cartList });
+    const { cartList, itemsQuantity } = this.props;
+    this.setState({ cartList, itemsQuantity });
   }
 
   render() {
-    const { cartList } = this.state;
+    const { cartList, itemsQuantity } = this.state;
+    const { handleIncrease, handleDecrease } = this.props;
 
     return (
       <section className="ShoppingCart">
-        {Boolean(!cartList.length) && (
+        {!cartList.length ? (
           <p data-testid="shopping-cart-empty-message">
             Seu carrinho está vazio
           </p>
+        ) : (
+          <ul>
+            {Object.keys(itemsQuantity).map((productId) => (
+              <CartItem
+                key={ productId }
+                { ...cartList.find((item) => item.id === productId) }
+                quantity={ itemsQuantity[productId] }
+                handleDecrease={ handleDecrease }
+                handleIncrease={ handleIncrease }
+              />
+            ))}
+          </ul>
         )}
-        {Boolean(cartList.length)
-          && (
-            <ul>
-              {cartList.map((item) => <CartItem key={ item.id } { ...item } />)}
-            </ul>
-          )}
       </section>
     );
   }
@@ -43,6 +51,9 @@ ShoppingCart.defaultProps = {
 
 ShoppingCart.propTypes = {
   cartList: PropTypes.arrayOf(PropTypes.object),
+  itemsQuantity: PropTypes.objectOf(PropTypes.number).isRequired,
+  handleDecrease: PropTypes.func.isRequired,
+  handleIncrease: PropTypes.func.isRequired,
 };
 
 export default ShoppingCart;

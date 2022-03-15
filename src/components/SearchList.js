@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import CategoriesList from './CategoriesList';
 import ProductCard from './ProductCard';
@@ -68,9 +67,6 @@ class SearchList extends Component {
               Digite algum termo de pesquisa ou escolha uma categoria.
             </p>
           )}
-          <Link data-testid="shopping-cart-button" to="/shopping-cart">
-            Carrinho
-          </Link>
           {Boolean(productsList.length)
             && productsList.map((product) => (
               <ProductCard
@@ -79,6 +75,7 @@ class SearchList extends Component {
                 image={ product.thumbnail }
                 price={ product.price }
                 productId={ product.id }
+                productList={ productsList }
                 handleAddCartToList={ handleAddCartToList }
               />
             ))}
