@@ -6,23 +6,18 @@ class CartItem extends Component {
     super();
 
     this.state = {
-      quantity: 1,
+      quantity: 0,
     };
   }
 
-  handleDecrease = () => {
-    const { quantity } = this.state;
-    if (quantity > 0) this.setState({ quantity: quantity - 1 });
-  }
-
-  handleIncrease = () => {
-    const { quantity } = this.state;
-    this.setState({ quantity: quantity + 1 });
+  componentDidMount() {
+    const { quantity } = this.props;
+    this.setState({ quantity });
   }
 
   render() {
     const { quantity } = this.state;
-    const { title, thumbnail, price } = this.props;
+    const { id, title, thumbnail, price, handleDecrease, handleIncrease } = this.props;
 
     return (
       <li className="CartItem">
@@ -33,7 +28,7 @@ class CartItem extends Component {
           <button
             type="button"
             data-testid="product-decrease-quantity"
-            onClick={ () => this.handleDecrease }
+            onClick={ () => handleDecrease(id) }
           >
             -
           </button>
@@ -41,7 +36,7 @@ class CartItem extends Component {
           <button
             type="button"
             data-testid="product-increase-quantity"
-            onClick={ () => this.handleIncrease }
+            onClick={ () => handleIncrease(id) }
           >
             +
           </button>
@@ -53,9 +48,13 @@ class CartItem extends Component {
 }
 
 CartItem.propTypes = {
+  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   thumbnail: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
+  quantity: PropTypes.number.isRequired,
+  handleDecrease: PropTypes.func.isRequired,
+  handleIncrease: PropTypes.func.isRequired,
 };
 
 export default CartItem;

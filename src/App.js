@@ -11,21 +11,60 @@ class App extends Component {
 
     this.state = {
       cartList: [],
+      itemsQuantity: {},
     };
   }
 
   handleAddCartToList = (productId, list, productObj) => {
     const { cartList } = this.state;
     if (productObj) {
-      this.setState({ cartList: [...cartList, productObj] });
+      this.setState({
+        cartList: [...cartList, productObj],
+      }, this.updateQuantity);
     } else {
       const selectedProduct = list.find((product) => product.id === productId);
-      this.setState({ cartList: [...cartList, selectedProduct] });
+      this.setState({ cartList: [...cartList, selectedProduct] }, this.updateQuantity);
     }
   };
 
-  render() {
+  handleDecrease = (productId) => {
+    const { cartList, itemsQuantity } = this.state;
+    if (itemsQuantity[productId] > 0) {
+      const updatedList = [...cartList];
+      const currItem = cartList.find((item) => item.id === productId);
+      const index = cartList.indexOf(currItem);
+      updatedList.splice(index, 1);
+      this.setState({ cartList: updatedList }, this.updateQuantity);
+    }
+  }
+
+  handleIncrease = (productId) => {
+    const { cartList, itemsQuantity } = this.state;
+    if (itemsQuantity[productId] > 0) {
+      const updatedList = [...cartList];
+      const currItem = cartList.find((item) => item.id === productId);
+      this.setState({ cartList: [...updatedList, currItem] }, this.updateQuantity);
+    }
+  }
+
+  updateQuantity = () => {
     const { cartList } = this.state;
+    const cartItems = [...new Set(cartList)];
+
+    const itemsQuantity = cartItems.reduce((obj, curr) => {
+      const accObj = obj;
+      accObj[curr.id] = cartList.reduce((acc, item) => {
+        if (item.id === curr.id) return acc + 1;
+        return acc;
+      }, 0);
+      return { ...obj, ...accObj };
+    }, {});
+
+    this.setState({ itemsQuantity });
+  }
+
+  render() {
+    const { cartList, itemsQuantity } = this.state;
 
     return (
       <BrowserRouter>
@@ -39,7 +78,12 @@ class App extends Component {
             <SearchList handleAddCartToList={ this.handleAddCartToList } />
           </Route>
           <Route path="/shopping-cart">
-            <ShoppingCart cartList={ cartList } />
+            <ShoppingCart
+              cartList={ cartList }
+              itemsQuantity={ itemsQuantity }
+              handleDecrease={ this.handleDecrease }
+              handleIncrease={ this.handleIncrease }
+            />
           </Route>
           <Route
             exact
