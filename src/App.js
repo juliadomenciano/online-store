@@ -86,7 +86,10 @@ class App extends Component {
         </Route>
         <Switch>
           <Route exact path="/">
-            <SearchList handleAddCartToList={ this.handleAddCartToList } />
+            <SearchList
+              handleAddCartToList={ this.handleAddCartToList }
+              itemsQuantity={ itemsQuantity }
+            />
           </Route>
           <Route path="/shopping-cart">
             <ShoppingCart

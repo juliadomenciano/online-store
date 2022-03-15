@@ -13,6 +13,8 @@ class ProductCard extends Component {
       handleAddCartToList,
       productId,
       productList,
+      availableQuantity,
+      itemsQuantity,
     } = this.props;
 
     return (
@@ -27,6 +29,8 @@ class ProductCard extends Component {
           productId={ productId }
           dataTestId="product-add-to-cart"
           productList={ productList }
+          itemsQuantity={ itemsQuantity }
+          availableQuantity={ availableQuantity }
         />
       </section>
     );
@@ -40,6 +44,8 @@ ProductCard.propTypes = {
   handleAddCartToList: PropTypes.func.isRequired,
   productId: PropTypes.string.isRequired,
   productList: PropTypes.arrayOf(PropTypes.object).isRequired,
+  availableQuantity: PropTypes.number.isRequired,
+  itemsQuantity: PropTypes.objectOf(PropTypes.number).isRequired,
 };
 
 export default ProductCard;
