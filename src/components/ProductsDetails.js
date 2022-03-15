@@ -1,4 +1,6 @@
+import PropTypes from 'prop-types';
 import React from 'react';
+import ProductReview from './ProductReview';
 
 class ProductsDetails extends React.Component {
   constructor() {
@@ -30,10 +32,16 @@ class ProductsDetails extends React.Component {
   }
 
   handleSubmit = () => {
-    const { match: { params } } = this.props;
     const { email, message, index, evaluation } = this.state;
     const rate = { email, message, index };
-    evaluation.push(rate);
+    this.setState({
+      evaluation: [...evaluation, rate],
+    }, this.storageEvaluations);
+  }
+
+  storageEvaluations = () => {
+    const { match: { params } } = this.props;
+    const { evaluation } = this.state;
     localStorage.setItem(params.id, JSON.stringify(evaluation));
     this.onLoadProductReviews();
   }
@@ -78,11 +86,18 @@ class ProductsDetails extends React.Component {
         >
           Avaliar
         </button>
-        {evaluation.map((teste) => (<h5>{teste.email}</h5>))}
+        {evaluation.map((evaluations) => (<ProductReview
+          key={ evaluations.email }
+          evaluations={ evaluations }
+        />))}
 
       </form>
     );
   }
 }
+
+ProductsDetails.propTypes = {
+  match: PropTypes.objectOf(Object).isRequired,
+};
 
 export default ProductsDetails;
