@@ -16,8 +16,7 @@ class ProductPage extends Component {
   }
 
   render() {
-    const { title, thumbnail, price, id } = this.state;
-    const { match: { params } } = this.props;
+    const { title, thumbnail, price } = this.state;
     return (
       <div>
         <section>
