@@ -6,7 +6,7 @@ class CartItem extends Component {
     super();
 
     this.state = {
-      quantity: 0,
+      quantity: 1,
     };
   }
 
@@ -15,9 +15,21 @@ class CartItem extends Component {
     this.setState({ quantity });
   }
 
+  decreaseQuantity = () => {
+    const { id, handleDecrease } = this.props;
+    const { quantity } = this.state;
+    if (quantity > 0) this.setState({ quantity: quantity - 1 }, handleDecrease(id));
+  }
+
+  increaseQuantity = () => {
+    const { id, handleIncrease } = this.props;
+    const { quantity } = this.state;
+    this.setState({ quantity: quantity + 1 }, handleIncrease(id));
+  }
+
   render() {
     const { quantity } = this.state;
-    const { id, title, thumbnail, price, handleDecrease, handleIncrease } = this.props;
+    const { title, thumbnail, price } = this.props;
 
     return (
       <li className="CartItem">
@@ -28,7 +40,7 @@ class CartItem extends Component {
           <button
             type="button"
             data-testid="product-decrease-quantity"
-            onClick={ () => handleDecrease(id) }
+            onClick={ () => this.decreaseQuantity() }
           >
             -
           </button>
@@ -36,7 +48,7 @@ class CartItem extends Component {
           <button
             type="button"
             data-testid="product-increase-quantity"
-            onClick={ () => handleIncrease(id) }
+            onClick={ () => this.increaseQuantity() }
           >
             +
           </button>

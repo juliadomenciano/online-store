@@ -29,7 +29,7 @@ class App extends Component {
 
   handleDecrease = (productId) => {
     const { cartList, itemsQuantity } = this.state;
-    if (itemsQuantity[productId] > 0) {
+    if (itemsQuantity[productId] > 1) {
       const updatedList = [...cartList];
       const currItem = cartList.find((item) => item.id === productId);
       const index = cartList.indexOf(currItem);
@@ -39,12 +39,10 @@ class App extends Component {
   }
 
   handleIncrease = (productId) => {
-    const { cartList, itemsQuantity } = this.state;
-    if (itemsQuantity[productId] > 0) {
-      const updatedList = [...cartList];
-      const currItem = cartList.find((item) => item.id === productId);
-      this.setState({ cartList: [...updatedList, currItem] }, this.updateQuantity);
-    }
+    const { cartList } = this.state;
+    const updatedList = [...cartList];
+    const currItem = cartList.find((item) => item.id === productId);
+    this.setState({ cartList: [...updatedList, currItem] }, this.updateQuantity);
   }
 
   updateQuantity = () => {
