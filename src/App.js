@@ -70,8 +70,18 @@ class App extends Component {
           <Link data-testid="shopping-cart-button" to="/shopping-cart">
             Carrinho
             <span data-testid="shopping-cart-size">
-              { Object.keys(itemsQuantity).length }
+              {Object.values(itemsQuantity)
+                .reduce((acc, item) => {
+                  acc += item;
+                  return acc;
+                }, 0)}
             </span>
+            {/* <span data-testid="shopping-cart-size">
+              { Object.keys(itemsQuantity).length }
+              </span> */}
+            {/* <span data-testid="shopping-cart-size">
+              { cartList.length }
+              </span> */}
           </Link>
         </Route>
         <Switch>
