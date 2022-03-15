@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { getProductById } from '../services/api';
 import AddToCartButton from './AddToCartButton';
+import ProductReviews from './ProductReviews';
 
 class ProductPage extends Component {
   constructor() {
@@ -20,16 +21,19 @@ class ProductPage extends Component {
     const { handleAddCartToList } = this.props;
 
     return (
-      <section>
-        <h2 data-testid="product-detail-name">{title}</h2>
-        <img src={ thumbnail } alt={ title } />
-        <p>{`R$ ${price}`}</p>
-        <AddToCartButton
-          handleAddCartToList={ handleAddCartToList }
-          dataTestId="product-detail-add-to-cart"
-          productObj={ this.state }
-        />
-      </section>
+      <div>
+        <section>
+          <h2 data-testid="product-detail-name">{title}</h2>
+          <img src={ thumbnail } alt={ title } />
+          <p>{`R$ ${price}`}</p>
+          <AddToCartButton
+            handleAddCartToList={ handleAddCartToList }
+            dataTestId="product-detail-add-to-cart"
+            productObj={ this.state }
+          />
+        </section>
+        <ProductReviews { ...this.props } />
+      </div>
     );
   }
 }

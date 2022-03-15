@@ -55,6 +55,7 @@ class CartItem extends Component {
         </div>
         <span>{`R$ ${price}`}</span>
       </li>
+
     );
   }
 }
