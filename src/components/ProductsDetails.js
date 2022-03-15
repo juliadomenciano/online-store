@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import ProductReview from './ProductReview';
+import './ProductsDetails.css';
 
 class ProductsDetails extends React.Component {
   constructor() {
@@ -9,7 +9,7 @@ class ProductsDetails extends React.Component {
       email: '',
       message: '',
       evaluation: [],
-      index: [],
+      index: 0,
     };
   }
 
@@ -47,57 +47,89 @@ class ProductsDetails extends React.Component {
   }
 
   render() {
-    const { email, message, index, evaluation } = this.state;
+    const { email, message, evaluation } = this.state;
+    const num = 5;
     return (
-      <form>
+      <>
         <h2>Avaliações</h2>
-        <label htmlFor="product-detail-email">
-          <input
-            name="email"
-            type="email"
-            value={ email }
-            placeholder="Email"
-            data-testid="product-detail-email"
-            onChange={ this.handleChange }
-          />
-        </label>
-        <label htmlFor="index">
-          Avalie de 1 a 5
-          <input
-            type="number"
-            name="index"
-            data-testid={ `${index}-index` }
-            value={ index }
-            onChange={ this.handleChange }
-          />
-        </label>
-        <label htmlFor="textArea">
-          <textarea
-            data-testid="product-detail-evaluation"
-            value={ message }
-            placeholder="Mensagem (opcional)"
-            onChange={ this.handleChange }
-          />
-        </label>
-        <button
-          type="button"
-          data-testid="submit-review-btn"
-          onClick={ this.handleSubmit }
-        >
-          Avaliar
-        </button>
-        {evaluation.map((evaluations) => (<ProductReview
-          key={ evaluations.email }
-          evaluations={ evaluations }
-        />))}
+        <form>
 
-      </form>
+          <div className="infoContainer">
+            <label htmlFor="product-detail-email">
+              <input
+                className="email"
+                name="email"
+                type="email"
+                value={ email }
+                placeholder="Email"
+                data-testid="product-detail-email"
+                onChange={ this.handleChange }
+              />
+            </label>
+
+            <div>
+              {
+                [...Array(num)].map((item, i) => {
+                  const index = i + 1;
+                  return (
+                    <label htmlFor="index" key={ index }>
+                      <input
+                        type="radio"
+                        name="index"
+                        data-testid={ `${index}-rating` }
+                        value={ index }
+                        onChange={ this.handleChange }
+                      />
+                    </label>);
+                })
+              }
+
+            </div>
+          </div>
+          <label htmlFor="message">
+            <textarea
+              data-testid="product-detail-evaluation"
+              value={ message }
+              name="message"
+              placeholder="Mensagem (opcional)"
+              onChange={ this.handleChange }
+            />
+          </label>
+          <button
+            type="button"
+            data-testid="submit-review-btn"
+            onClick={ this.handleSubmit }
+          >
+            Avaliar
+          </button>
+        </form>
+        <section className="container">
+          {!evaluation.length
+            ? (
+              <p>
+                Avaliações
+              </p>)
+            : evaluation.map((item, i) => (
+              <div className="review" key={ i }>
+                <div className="info">
+                  <p>{item.email}</p>
+                  <p>{item.index}</p>
+                </div>
+                <p>{item.message}</p>
+              </div>
+            ))}
+        </section>
+      </>
     );
   }
 }
 
 ProductsDetails.propTypes = {
-  match: PropTypes.objectOf(Object).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }).isRequired,
 };
 
 export default ProductsDetails;
