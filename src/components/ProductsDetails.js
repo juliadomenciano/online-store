@@ -36,6 +36,9 @@ class ProductsDetails extends React.Component {
     const rate = { email, message, index };
     this.setState({
       evaluation: [...evaluation, rate],
+      email: '',
+      message: '',
+      index: 0,
     }, this.storageEvaluations);
   }
 
