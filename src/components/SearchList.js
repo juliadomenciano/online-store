@@ -41,7 +41,7 @@ class SearchList extends Component {
 
   render() {
     const { productsList, query } = this.state;
-    const { handleAddCartToList } = this.props;
+    const { handleAddCartToList, itemsQuantity } = this.props;
 
     return (
       <>
@@ -68,17 +68,25 @@ class SearchList extends Component {
             </p>
           )}
           {Boolean(productsList.length)
-            && productsList.map((product) => (
-              <ProductCard
-                key={ product.id }
-                title={ product.title }
-                image={ product.thumbnail }
-                price={ product.price }
-                productId={ product.id }
-                productList={ productsList }
-                handleAddCartToList={ handleAddCartToList }
-              />
-            ))}
+            && productsList.map((product) => {
+              const { shipping } = product;
+              const freeShipping = shipping.free_shipping;
+              return (
+                <ProductCard
+                  key={ product.id }
+                  item={ product }
+                  title={ product.title }
+                  image={ product.thumbnail }
+                  price={ product.price }
+                  freeShipping={ freeShipping }
+                  availableQuantity={ product.available_quantity }
+                  productId={ product.id }
+                  productList={ productsList }
+                  handleAddCartToList={ handleAddCartToList }
+                  itemsQuantity={ itemsQuantity }
+                />
+              );
+            })}
         </section>
       </>
     );
@@ -87,6 +95,7 @@ class SearchList extends Component {
 
 SearchList.propTypes = {
   handleAddCartToList: PropTypes.func.isRequired,
+  itemsQuantity: PropTypes.objectOf(PropTypes.number).isRequired,
 };
 
 export default SearchList;

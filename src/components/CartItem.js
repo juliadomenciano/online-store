@@ -23,8 +23,12 @@ class CartItem extends Component {
 
   increaseQuantity = () => {
     const { id, handleIncrease } = this.props;
+    const { props } = this;
+    const availableQuantity = props.available_quantity;
     const { quantity } = this.state;
-    this.setState({ quantity: quantity + 1 }, handleIncrease(id));
+    if (quantity < availableQuantity) {
+      this.setState({ quantity: quantity + 1 }, handleIncrease(id));
+    }
   }
 
   render() {
@@ -68,6 +72,7 @@ CartItem.propTypes = {
   quantity: PropTypes.number.isRequired,
   handleDecrease: PropTypes.func.isRequired,
   handleIncrease: PropTypes.func.isRequired,
+  available_quantity: PropTypes.number.isRequired,
 };
 
 export default CartItem;
