@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { RiShoppingCartFill } from 'react-icons/ri';
 import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Checkout from './components/Checkout';
@@ -14,6 +15,15 @@ class App extends Component {
       cartList: [],
       itemsQuantity: {},
     };
+  }
+
+  componentDidMount() {
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    if (cart) this.setState({ ...cart });
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem('cart', JSON.stringify(this.state));
   }
 
   handleAddCartToList = (productId, list, productObj) => {
@@ -69,7 +79,9 @@ class App extends Component {
       <BrowserRouter>
         <Route path="/">
           <Link data-testid="shopping-cart-button" to="/shopping-cart">
-            Carrinho
+            <div className="App-cart-icon">
+              <RiShoppingCartFill />
+            </div>
             <span data-testid="shopping-cart-size">
               {Object.values(itemsQuantity)
                 .reduce((acc, item) => {
