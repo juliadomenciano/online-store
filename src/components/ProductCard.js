@@ -28,6 +28,7 @@ class ProductCard extends Component {
           <p>{price}</p>
         </Link>
         <AddToCartButton
+          className="ProductCard-button"
           handleAddCartToList={ handleAddCartToList }
           productId={ productId }
           dataTestId="product-add-to-cart"
