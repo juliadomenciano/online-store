@@ -1,7 +1,7 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery } from '../services/api';
-import ListCategories from './ListCategories';
+import CategoriesList from './CategoriesList';
 import ProductCard from './ProductCard';
 import './SearchList.css';
 
@@ -22,18 +22,22 @@ class SearchList extends Component {
 
   fetchProducts = async () => {
     const { categoryId, query } = this.state;
-    const response = await getProductsFromCategoryAndQuery(
-      categoryId,
-      query,
-    );
+    const response = await getProductsFromCategoryAndQuery(categoryId, query);
     const productsList = response.results;
     this.setState({ productsList });
-  }
+  };
 
   handleQueryInput = ({ target }) => {
     const query = target.value;
     this.setState({ query });
-  }
+  };
+
+  filterByCategory = ({ target }) => {
+    const categoryId = target.value;
+    this.setState({
+      categoryId,
+    }, this.fetchProducts);
+  };
 
   FilterByCategory =({ target }) => {
     const categoryId = target.value;
@@ -46,12 +50,11 @@ class SearchList extends Component {
 
   render() {
     const { productsList, query } = this.state;
+    const { handleAddCartToList, itemsQuantity } = this.props;
 
     return (
       <main className="pageContainer">
-        <section className="ListCategories">
-          <ListCategories filterByCategory={ this.FilterByCategory } />
-        </section>
+        <CategoriesList filterByCategory={ this.filterByCategory } />
         <section className="SearchList">
           <form>
             <input
@@ -67,33 +70,41 @@ class SearchList extends Component {
             >
               Pesquisar
             </button>
-            <Link data-testid="shopping-cart-button" to="/shopping-cart">Carrinho</Link>
           </form>
-          <div className="cardsContainer">
-            {Boolean(!productsList.length) && (
-              <p data-testid="home-initial-message">
-                Digite algum termo de pesquisa ou escolha uma categoria.
-              </p>
-            )}
-
-            {
-              Boolean(productsList.length)
-           && productsList.map((product) => (
-             <ProductCard
-               key={ product.id }
-               title={ product.title }
-               image={ product.thumbnail }
-               price={ product.price }
-             />
-           ))
-            }
-          </div>
-
+          {Boolean(!productsList.length) && (
+            <p data-testid="home-initial-message">
+              Digite algum termo de pesquisa ou escolha uma categoria.
+            </p>
+          )}
+          {Boolean(productsList.length)
+            && productsList.map((product) => {
+              const { shipping } = product;
+              const freeShipping = shipping.free_shipping;
+              return (
+                <ProductCard
+                  key={ product.id }
+                  item={ product }
+                  title={ product.title }
+                  image={ product.thumbnail }
+                  price={ product.price }
+                  freeShipping={ freeShipping }
+                  availableQuantity={ product.available_quantity }
+                  productId={ product.id }
+                  productList={ productsList }
+                  handleAddCartToList={ handleAddCartToList }
+                  itemsQuantity={ itemsQuantity }
+                />
+              );
+            })}
         </section>
-
       </main>
     );
   }
 }
+
+SearchList.propTypes = {
+  handleAddCartToList: PropTypes.func.isRequired,
+  itemsQuantity: PropTypes.objectOf(PropTypes.number).isRequired,
+};
 
 export default SearchList;
