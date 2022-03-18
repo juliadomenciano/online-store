@@ -6,6 +6,7 @@ import Checkout from './components/Checkout';
 import ProductPage from './components/ProductPage';
 import SearchList from './components/SearchList';
 import ShoppingCart from './components/ShoppingCart';
+/* Agora foi!! */
 
 class App extends Component {
   constructor() {
