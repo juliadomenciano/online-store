@@ -22,10 +22,14 @@ class ProductCard extends Component {
     return (
       <section className="ProductCard" data-testid="product">
         <Link data-testid="product-detail-link" to={ `/product/${productId}` }>
-          {freeShipping && <FreeShipping />}
-          <h3 className="title">{title}</h3>
-          <img src={ image } alt={ title } />
-          <p>{price}</p>
+          <div className="ProductCard-Image">
+            <img src={ image } alt={ title } />
+          </div>
+          <div className="ProductCard-Description">
+            {freeShipping && <FreeShipping />}
+            <h3 className="title">{title}</h3>
+            <p>{price}</p>
+          </div>
         </Link>
         <AddToCartButton
           handleAddCartToList={ handleAddCartToList }

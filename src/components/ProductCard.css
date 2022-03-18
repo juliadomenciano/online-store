@@ -1,18 +1,49 @@
+* {
+  font-family: var(--font);
+  text-decoration: none;
+}
+
 .ProductCard {
-  align-items: center;
+
+  /* align-items: center; */
+  background-color: var(--gray);
   border: 1px solid black;
-  border-radius: 15px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
+  height: 700px;
   justify-content: space-between;
   margin-bottom: 20px;
-  padding-bottom: 15px;
-  padding-top: 0;
-  width: 200px;
+  width: 400px;
+}
+
+a {
+  display: flex;
+  flex-direction: row;
+}
+
+.ProductCard-Link {
+  display: flex;
+}
+
+.ProductCard-Button {
+  align-self: center;
+  background-color: var(--button);
+  box-shadow: 4px 5px 4px rgba(0, 0, 0, 0.25);
+  color: var(--white);
+  display: flex;
+  font: 600;
+  padding: 10px;
+}
+
+.ProductCard-Image {
+  align-items: center;
+  background-color: white;
+  display: flex;
+  height: 100%;
 }
 
 .title {
-  background-color: rgb(216, 216, 216);
   border-radius: 15px 15px 0 0;
   margin-bottom: 5px;
   padding: 5px;
