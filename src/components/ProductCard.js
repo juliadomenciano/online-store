@@ -25,10 +25,13 @@ class ProductCard extends Component {
           <div className="ProductCard-Image">
             <img src={ image } alt={ title } />
           </div>
-          <div className="ProductCard-Description">
+          <h3 className="ProductCard-title">{title}</h3>
+          <div>
             {freeShipping && <FreeShipping />}
-            <h3 className="title">{title}</h3>
-            <p>{price}</p>
+            <p className="ProductCard-price">
+              <span className="ProductCard-price-symbol">{'R$ '}</span>
+              {price.toFixed(2)}
+            </p>
           </div>
         </Link>
         <AddToCartButton
