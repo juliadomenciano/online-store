@@ -89,12 +89,6 @@ class App extends Component {
                   return acc;
                 }, 0)}
             </span>
-            {/* <span data-testid="shopping-cart-size">
-              { Object.keys(itemsQuantity).length }
-              </span> */}
-            {/* <span data-testid="shopping-cart-size">
-              { cartList.length }
-              </span> */}
           </Link>
         </Route>
         <Switch>

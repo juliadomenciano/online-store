@@ -76,26 +76,28 @@ class SearchList extends Component {
               Digite algum termo de pesquisa ou escolha uma categoria.
             </p>
           )}
-          {Boolean(productsList.length)
-            && productsList.map((product) => {
-              const { shipping } = product;
-              const freeShipping = shipping.free_shipping;
-              return (
-                <ProductCard
-                  key={ product.id }
-                  item={ product }
-                  title={ product.title }
-                  image={ product.thumbnail }
-                  price={ product.price }
-                  freeShipping={ freeShipping }
-                  availableQuantity={ product.available_quantity }
-                  productId={ product.id }
-                  productList={ productsList }
-                  handleAddCartToList={ handleAddCartToList }
-                  itemsQuantity={ itemsQuantity }
-                />
-              );
-            })}
+          <div className="SearchList-container-cards">
+            {Boolean(productsList.length)
+              && productsList.map((product) => {
+                const { shipping } = product;
+                const freeShipping = shipping.free_shipping;
+                return (
+                  <ProductCard
+                    key={ product.id }
+                    item={ product }
+                    title={ product.title }
+                    image={ product.thumbnail }
+                    price={ product.price }
+                    freeShipping={ freeShipping }
+                    availableQuantity={ product.available_quantity }
+                    productId={ product.id }
+                    productList={ productsList }
+                    handleAddCartToList={ handleAddCartToList }
+                    itemsQuantity={ itemsQuantity }
+                  />
+                );
+              })}
+          </div>
         </section>
       </main>
     );
