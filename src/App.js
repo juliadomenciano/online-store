@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { RiShoppingCartFill } from 'react-icons/ri';
-import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Checkout from './components/Checkout';
+import Header from './components/Header';
 import ProductPage from './components/ProductPage';
 import SearchList from './components/SearchList';
 import ShoppingCart from './components/ShoppingCart';
@@ -78,18 +78,13 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Route path="/">
-          <Link data-testid="shopping-cart-button" to="/shopping-cart">
-            <div className="App-cart-icon">
-              <RiShoppingCartFill />
-            </div>
-            <span data-testid="shopping-cart-size">
-              {Object.values(itemsQuantity)
-                .reduce((acc, item) => {
-                  acc += item;
-                  return acc;
-                }, 0)}
-            </span>
-          </Link>
+          <Header
+            itemsQuantity={ Object.values(itemsQuantity)
+              .reduce((acc, item) => {
+                acc += item;
+                return acc;
+              }, 0) }
+          />
         </Route>
         <Switch>
           <Route exact path="/">
