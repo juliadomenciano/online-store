@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { FiSearch } from 'react-icons/fi';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import CategoriesList from './CategoriesList';
 import ProductCard from './ProductCard';
@@ -56,7 +57,7 @@ class SearchList extends Component {
       <main className="pageContainer">
         <CategoriesList filterByCategory={ this.filterByCategory } />
         <section className="SearchList">
-          <form>
+          <form className="SearchList-searchbar">
             <input
               data-testid="query-input"
               type="text"
@@ -67,8 +68,9 @@ class SearchList extends Component {
               type="button"
               data-testid="query-button"
               onClick={ this.fetchProducts }
+              className="SearchList-searchbar-button"
             >
-              Pesquisar
+              <FiSearch />
             </button>
           </form>
           {Boolean(!productsList.length) && (
